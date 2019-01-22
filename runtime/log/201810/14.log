@@ -1,0 +1,253 @@
+[ 2018-10-14T12:21:33+08:00 ] ::1 ::1 GET /sharefavorite/public/index.php/api/v1/decode/getGroups
+[ log ] localhost/sharefavorite/public/index.php/api/v1/decode/getGroups [运行时间：0.490000s][吞吐率：2.04req/s] [内存消耗：1,517.19kb] [文件加载：39]
+[ info ] [ LANG ] C:\wamp64\www\sharefavorite\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'api',
+    1 => 'v1.Decode',
+    2 => 'getGroups',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1809111 MicroMessenger/6.5.7 Language/zh_CN webview/ token/1ff42f3df5a0edbf319025704dc00fa3',
+  'token' => 'f7a6d10299ea60d189c5e6dffce1210c',
+  'content-type' => 'application/json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxb27bd846bfec0588/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate, br',
+)
+[ info ] [ PARAM ] array (
+  'version' => 'v1',
+)
+[ info ] [ RUN ] app\api\controller\v1\Decode->getGroups[ C:\wamp64\www\sharefavorite\application\api\controller\v1\Decode.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ LOG ] INIT File
+[ error ] [401][C:\wamp64\www\sharefavorite\application\api\service\Token.php:25]
+
+---------------------------------------------------------------
+[ 2018-10-14T12:21:35+08:00 ] ::1 ::1 POST /sharefavorite/public/index.php/api/v1/token/user
+[ log ] localhost/sharefavorite/public/index.php/api/v1/token/user [运行时间：1.716000s][吞吐率：0.58req/s] [内存消耗：2,994.61kb] [文件加载：48]
+[ info ] [ LANG ] C:\wamp64\www\sharefavorite\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'api',
+    1 => 'v1.Token',
+    2 => 'getToken',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'content-length' => '43',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:53511',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1809111 MicroMessenger/6.5.7 Language/zh_CN webview/ token/1ff42f3df5a0edbf319025704dc00fa3',
+  'content-type' => 'application/json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxb27bd846bfec0588/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate, br',
+)
+[ info ] [ PARAM ] array (
+  'code' => '011LK9MY131wr11KtdMY1T2mMY1LK9M0',
+  'version' => 'v1',
+)
+[ info ] [ RUN ] app\api\controller\v1\Token->getToken[ C:\wamp64\www\sharefavorite\application\api\controller\v1\Token.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.015000s ] mysql:dbname=sharefavorite;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user` [ RunTime:0.017000s ]
+[ sql ] [ SQL ] SELECT * FROM `user` WHERE  `openid` = 'owz3T5BtE4JsgiUeihkb5N6jZHdI' LIMIT 1 [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2018-10-14T12:21:36+08:00 ] ::1 ::1 GET /sharefavorite/public/index.php/api/v1/decode/getGroups
+[ log ] localhost/sharefavorite/public/index.php/api/v1/decode/getGroups [运行时间：0.448000s][吞吐率：2.23req/s] [内存消耗：3,108.84kb] [文件加载：55]
+[ info ] [ LANG ] C:\wamp64\www\sharefavorite\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'api',
+    1 => 'v1.Decode',
+    2 => 'getGroups',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1809111 MicroMessenger/6.5.7 Language/zh_CN webview/ token/1ff42f3df5a0edbf319025704dc00fa3',
+  'token' => '0f3e96a59c3102104c1453917a3886c3',
+  'content-type' => 'application/json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxb27bd846bfec0588/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate, br',
+)
+[ info ] [ PARAM ] array (
+  'version' => 'v1',
+)
+[ info ] [ RUN ] app\api\controller\v1\Decode->getGroups[ C:\wamp64\www\sharefavorite\application\api\controller\v1\Decode.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=sharefavorite;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `user` WHERE  `id` = 8 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_group` [ RunTime:0.039000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_group` WHERE  `user_id` IN (8) [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_group` WHERE  `user_id` IN (8) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `group` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `group` WHERE  `id` IN (1,2) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `commit` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit` WHERE  `group_id` = 1 ORDER BY id desc LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `commit_image` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit_image` WHERE  `commit_id` = 97 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit_image` WHERE  `commit_id` = 97 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `image` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `image` WHERE  `id` IN (371,372,373,374,375) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit` WHERE  `group_id` = 2 ORDER BY id desc LIMIT 1 [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2018-10-14T12:21:37+08:00 ] ::1 ::1 POST /sharefavorite/public/index.php/api/v1/decode/user
+[ log ] localhost/sharefavorite/public/index.php/api/v1/decode/user [运行时间：0.308000s][吞吐率：3.25req/s] [内存消耗：2,754.21kb] [文件加载：46]
+[ info ] [ LANG ] C:\wamp64\www\sharefavorite\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'api',
+    1 => 'v1.Decode',
+    2 => 'decodeUser',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'content-length' => '544',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:53511',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1809111 MicroMessenger/6.5.7 Language/zh_CN webview/ token/1ff42f3df5a0edbf319025704dc00fa3',
+  'token' => '0f3e96a59c3102104c1453917a3886c3',
+  'content-type' => 'application/json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxb27bd846bfec0588/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate, br',
+)
+[ info ] [ PARAM ] array (
+  'encryptedData' => 'RdPLNI1rmtHCY0s9CSWJdLXOynWcVKA3tpUv28Sg7gbo/6Ao+z7u/m5di7nI0O4RDEtZfxipVuGYoDfEYE1pAwFD3nCLo43UBgRIfg7nbr2L0FeGS1QCJXfS83UR1c6faG3mnm0M8IOMT5FFukAcmZRs++slTmvcX03ZWcMroS5bgN24undI2SVBRHzzeDaQrhqMvtlSbe+9Ey6NQ0fkygHSXPVRthM3LWgqeZS/HRxCOi0yNQzMFrvOM0cSm1EL743secje775fZLSj0ObHIIRp67rnpblto0jAAuaA6QVpManD9UQdQWNrTeRaRTN9wLIpcyGB6Nubprbi+Fp8Wsc+ds0bT7hg7T/lCQr5EIRRYRfvpPQFUROFPFrWA6IleKRfIV5HRW6IQw9Fwt/hYaOWuat/1kdy6iN8KZ3RLnoIQbq80HtBCHM+epDATH/AymmdLDHY9ap+vfi/WKlYJXlGqZq8wIKd2zwdBfF2gUk=',
+  'iv' => '8CDtA103ZSd0KpNd0HzhYg==',
+  'version' => 'v1',
+)
+[ info ] [ RUN ] app\api\controller\v1\Decode->decodeUser[ C:\wamp64\www\sharefavorite\application\api\controller\v1\Decode.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:dbname=sharefavorite;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `user` WHERE  `openid` = 'owz3T5BtE4JsgiUeihkb5N6jZHdI' LIMIT 1 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] UPDATE `user`  SET `update_time`=1539490896  WHERE  `id` = 8 [ RunTime:0.008000s ]
+
+---------------------------------------------------------------
+[ 2018-10-14T12:21:43+08:00 ] ::1 ::1 GET /sharefavorite/public/index.php/api/v1/group/getGroupCommit?groupId=1&offset=0&size=10
+[ log ] localhost/sharefavorite/public/index.php/api/v1/group/getGroupCommit?groupId=1&offset=0&size=10 [运行时间：0.572000s][吞吐率：1.75req/s] [内存消耗：2,923.96kb] [文件加载：48]
+[ info ] [ LANG ] C:\wamp64\www\sharefavorite\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'api',
+    1 => 'v1.Group',
+    2 => 'getGroupCommit',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1809111 MicroMessenger/6.5.7 Language/zh_CN webview/ token/1ff42f3df5a0edbf319025704dc00fa3',
+  'token' => '0f3e96a59c3102104c1453917a3886c3',
+  'content-type' => 'application/json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxb27bd846bfec0588/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate, br',
+)
+[ info ] [ PARAM ] array (
+  'groupId' => '1',
+  'offset' => '0',
+  'size' => '10',
+  'version' => 'v1',
+)
+[ info ] [ RUN ] app\api\controller\v1\Group->getGroupCommit[ C:\wamp64\www\sharefavorite\application\api\controller\v1\Group.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009000s ] mysql:dbname=sharefavorite;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `commit` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit` WHERE  `group_id` = 1 LIMIT 0,10 [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `commit_image` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit_image` WHERE  `commit_id` IN (86,83,87,88,89,90,91,92,93,94) [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit_image` WHERE  `commit_id` IN (86,83,87,88,89,90,91,92,93,94) [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `image` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT * FROM `image` WHERE  `id` IN (328,337,336,333,334,335,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366) [ RunTime:0.002000s ]
+
+---------------------------------------------------------------
+[ 2018-10-14T12:21:45+08:00 ] ::1 ::1 GET /sharefavorite/public/index.php/api/v1/group/getGroupCommit?groupId=1&offset=10&size=10
+[ log ] localhost/sharefavorite/public/index.php/api/v1/group/getGroupCommit?groupId=1&offset=10&size=10 [运行时间：0.340000s][吞吐率：2.94req/s] [内存消耗：2,904.84kb] [文件加载：48]
+[ info ] [ LANG ] C:\wamp64\www\sharefavorite\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'api',
+    1 => 'v1.Group',
+    2 => 'getGroupCommit',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1809111 MicroMessenger/6.5.7 Language/zh_CN webview/ token/1ff42f3df5a0edbf319025704dc00fa3',
+  'token' => '0f3e96a59c3102104c1453917a3886c3',
+  'content-type' => 'application/json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxb27bd846bfec0588/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate, br',
+)
+[ info ] [ PARAM ] array (
+  'groupId' => '1',
+  'offset' => '10',
+  'size' => '10',
+  'version' => 'v1',
+)
+[ info ] [ RUN ] app\api\controller\v1\Group->getGroupCommit[ C:\wamp64\www\sharefavorite\application\api\controller\v1\Group.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=sharefavorite;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `commit` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit` WHERE  `group_id` = 1 LIMIT 10,10 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `commit_image` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit_image` WHERE  `commit_id` IN (95,96,97) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `commit_image` WHERE  `commit_id` IN (95,96,97) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `image` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `image` WHERE  `id` IN (367,368,371,372,373,374,375) [ RunTime:0.002000s ]
+
+---------------------------------------------------------------
