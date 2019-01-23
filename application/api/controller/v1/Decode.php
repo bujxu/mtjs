@@ -29,7 +29,7 @@ class Decode
     public function getGroups()
     {
         $result = GroupService::getGroupsWithUser(TokenService::getCurrentUid());
-        Log::record($result, 'error');
+
         return $result;
     }
 }
