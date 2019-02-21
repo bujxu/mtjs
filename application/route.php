@@ -57,7 +57,6 @@ Route::get('api/:version/decode/getGroups', 'api/:version.Decode/getGroups');
 Route::get('api/:version/group/getGroupUsers', 'api/:version.Group/getGroupUsers');
 Route::get('api/:version/group/getGroupCommit', 'api/:version.Group/getGroupCommit');
 // Route::get('api/:version/user/getGroupUserInfo', 'api/:version.User/getGroupUserInfo');
-Route::post('api/:version/group/userUploadSingle', 'api/:version.Group/userUploadSingle');
 Route::post('api/:version/group/userUploadAdd', 'api/:version.Group/userUploadAdd');
 Route::post('api/:version/group/userUploadModify', 'api/:version.Group/userUploadModify');
 Route::get('api/:version/group/userUploadDel', 'api/:version.Group/userUploadDel');
@@ -67,4 +66,16 @@ Route::get('api/:version/group/getCommit', 'api/:version.Group/getCommit');
 Route::post('api/:version/address/commitAddress', 'api/:version.Address/commitAddress');
 Route::get('api/:version/address/getAddress', 'api/:version.Address/getAddress');
 Route::post('api/:version/user/login', 'api/:version.User/login');
+//good
+Route::post('api/:version/good/uploadImage', 'api/:version.Good/uploadImage');
+Route::post('api/:version/good/userUploadAdd', 'api/:version.Good/userUploadAdd');
+Route::post('api/:version/good/userUploadModify', 'api/:version.Good/userUploadModify');
+Route::get('api/:version/good/goodList', 'api/:version.Good/goodList');
+Route::get('api/:version/good/goodDelete', 'api/:version.Good/goodDelete');
 
+//shop
+Route::get('api/:version/shop/getShopInfo', 'api/:version.Shop/getShopInfo');
+Route::post('api/:version/shop/shopCreate', 'api/:version.Shop/shopCreate');
+Route::post('api/:version/shop/shopEdit', 'api/:version.Shop/shopEdit');
+Route::get('api/:version/shop/getShopListInfo', 'api/:version.Shop/getShopListInfo');
+Route::get('api/:version/shop/getShopInfoByShopId', 'api/:version.Shop/getShopInfoByShopId');
