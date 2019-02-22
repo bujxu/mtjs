@@ -6,16 +6,26 @@ use app\api\model\Good as GoodModel;
 use \app\api\service\Upload as UploadService;
 use app\api\service\Token as TokenService;
 use app\api\service\Good as GoodService;
+use app\api\model\UserAddress;
 use \think\Db;
 
 class Good
 {
-    // public function getGroupCommit($groupId='')
-    // {
-    //     $result = CommitService::getGroupCommit($groupId);
-        
-    //     return $result;
-    // }
+    public function getGoodInfo()
+    {
+        $id = input('get.good_id');
+        $goodInfo = GoodService::getGoodInfo($id);
+        $imagesTemp = $goodInfo['good_images'];
+        $goodInfo['imageUrl'] =  self::getImageUrl($imagesTemp);
+        $userId = TokenService::getCurrentUid();
+
+        $address = UserAddress::where(['user_id' => $userId, 'status' => 'DEFAULT'])->find();
+        if ($address != null)
+        {
+            $address = $address->toArray();
+        }
+        return array('result' => 'ok', 'goodInfo' => $goodInfo, 'address' => $address);
+    }
 
     // public function getGroupUsers($groupId='')
     // {

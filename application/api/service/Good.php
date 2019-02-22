@@ -42,6 +42,23 @@ class Good
 
     }
 
+    public static function getImageUrl($val)
+    {
+        $imageUrl = [];
+        foreach ($val as $value) {
+            array_push($imageUrl,$value['image']['url']);
+        }
+        
+        return $imageUrl;
+    }
+
+    public static function getGoodInfo($id)
+    {
+        $goodInfo = GoodModel::getGoodInfo($id);
+
+        return $goodInfo;
+    }
+
     public static function createGoodImage($goodId, $images, $detailImage)
     {   
         $imagesId = array_values($images);

@@ -31,6 +31,16 @@ class Good extends BaseModel
         return $goodList;
     }
 
+    public static function getGoodInfo($id)
+    {
+        $goodInfo = self::where(['id' => $id])->with(['goodImages', 'goodImages.image'])->find();
+        if ($goodInfo == null)
+        {
+            return null;
+        }
+        return $goodInfo->toArray();
+    }
+
     public static function modifyContent($commitId, $content)
     {
         $commitDb = self::where(['id' => $commitId])->find();

@@ -72,10 +72,14 @@ Route::post('api/:version/good/userUploadAdd', 'api/:version.Good/userUploadAdd'
 Route::post('api/:version/good/userUploadModify', 'api/:version.Good/userUploadModify');
 Route::get('api/:version/good/goodList', 'api/:version.Good/goodList');
 Route::get('api/:version/good/goodDelete', 'api/:version.Good/goodDelete');
-
+Route::get('api/:version/good/getGoodInfo', 'api/:version.Good/getGoodInfo');
 //shop
 Route::get('api/:version/shop/getShopInfo', 'api/:version.Shop/getShopInfo');
 Route::post('api/:version/shop/shopCreate', 'api/:version.Shop/shopCreate');
 Route::post('api/:version/shop/shopEdit', 'api/:version.Shop/shopEdit');
 Route::get('api/:version/shop/getShopListInfo', 'api/:version.Shop/getShopListInfo');
 Route::get('api/:version/shop/getShopInfoByShopId', 'api/:version.Shop/getShopInfoByShopId');
+Route::post('api/:version/address/createAddress', 'api/:version.Address/createAddress');
+Route::post('api/:version/address/modifyAddress', 'api/:version.Address/modifyAddress');
+Route::post('api/:version/address/defaultAddress', 'api/:version.Address/defaultAddress');
+Route::get('api/:version/address/deleteAddress', 'api/:version.Address/deleteAddress');

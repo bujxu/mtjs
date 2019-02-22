@@ -5,7 +5,7 @@ namespace app\api\model;
 class UserAddress extends BaseModel
 {
     protected $hidden = [
-        'id', 'delete_time', 'user_id', 'create_time', 'update_time', 'who'
+        'delete_time', 'user_id', 'create_time', 'update_time',
     ];
 
     // public static function getAddress($uid, $who)

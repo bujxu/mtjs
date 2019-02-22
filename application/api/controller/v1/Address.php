@@ -11,6 +11,70 @@ class Address extends \app\api\controller\BaseController
         'checkPrimaryScope' => ['only' => 'createOrUpdateAddress']
     ];
 
+
+    public function createAddress()
+    {
+        $data = input('post.');
+        
+        $uid = TokenService::getCurrentUid();
+        $address = new UserAddress;
+        $address->data([
+            "user_id" => $uid,
+            'contact' => $data['contact'],
+            'house_number' => $data['houseNumber'],
+            'address_detail' => $data['addressDetail'],
+            'phone_name' => $data['phoneNumber'],
+            'status' => $data['status'],
+        ])->save();
+
+        if ($data['status'] == 'DEFAULT')
+        {
+            self::defaultAddress();
+        }
+    }
+
+    public function deleteAddress()
+    {
+        $id = input('get.address_id');
+        UserAddress::destroy([$id]);
+    }
+
+    public function defaultAddress()
+    {
+        $id = input('post.address_id');
+        $uid = TokenService::getCurrentUid();
+        $addressList = UserAddress::where(['user_id' => $uid])->select();
+        for ($index = 0; $index < count($addressList); $index++)
+        {
+            if ($addressList[$index]->id == $id)
+            {
+                $addressList[$index]->status = 'DEFAULT';
+            }
+            else
+            {
+                $addressList[$index]->status = 'COMMON';
+            }
+            $addressList[$index]->save();
+        }
+    }
+
+    public function modifyAddress()
+    {
+        $data= input('post.');
+        $address = UserAddress::where(['id' => $data['address_id']])->find();
+        $address->data([
+            'name' => $data['contact'],
+            'house_number' => $data['houseNumber'],
+            'detail_address' => $data['addressDetail'],
+            'mobile' => $data['phoneNumber'],
+            'status' => $data['status'],
+        ])->save();
+
+        if ($data['status'] == 'DEFAULT')
+        {
+            self::defaultAddress();
+        }
+    }
     public function commitAddress()
     {
         $data = input('post.');
@@ -23,7 +87,7 @@ class Address extends \app\api\controller\BaseController
             'house_number' => $data['houseNumber'],
             'detail_address' => $data['addressDetail'],
             'mobile' => $data['phoneNumber'],
-            'who' => $data['who'],
+            'status' => $data['status'],
         ]);
         $address->save();
 
@@ -31,10 +95,8 @@ class Address extends \app\api\controller\BaseController
 
     public function getAddress()
     {
-        $who = input('get.who');
         $uid = TokenService::getCurrentUid();
-        $result = UserAddress::all(['user_id' => $uid, 'who' => $who])->toArray();
-        
+        $result = UserAddress::all(['user_id' => $uid])->toArray();
         
         return $result;
     }
