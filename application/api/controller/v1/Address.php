@@ -23,7 +23,7 @@ class Address extends \app\api\controller\BaseController
             'contact' => $data['contact'],
             'house_number' => $data['houseNumber'],
             'address_detail' => $data['addressDetail'],
-            'phone_name' => $data['phoneNumber'],
+            'phone_number' => $data['phoneNumber'],
             'status' => $data['status'],
         ])->save();
 
