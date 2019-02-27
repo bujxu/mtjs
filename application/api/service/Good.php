@@ -4,9 +4,13 @@ namespace app\api\service;
 use \think\Db;
 use app\api\model\GoodImage as GoodImageModel;
 use app\api\model\UserGood as UserGoodModel;
+use app\api\model\UserShop as UserShopModel;
+use app\api\model\UserAddress;
 use app\api\model\Good as GoodModel;
+use app\api\model\Shop as ShopModel;
 use app\api\model\Image as ImageModel;
 use app\api\service\Good as GoodService;
+use \app\api\service\Token as TokenService;
 
 class Good
 {
@@ -52,11 +56,52 @@ class Good
         return $imageUrl;
     }
 
+    public static function getImageUrls($val)
+    {
+        $imagesTemp = $val['good_images'];
+        $imageId = [];
+        $imageDetailId = [];
+        foreach ($imagesTemp as $value) {
+            if ($value["detail_image"] == 0)
+            {
+                array_push($imageId,$value['image']['url']);
+            }
+            else
+            {
+                array_push($imageDetailId,$value['image']['url']);
+            }
+        }
+        
+        return array($imageId, $imageDetailId);
+    }
+
+
     public static function getGoodInfo($id)
     {
         $goodInfo = GoodModel::getGoodInfo($id);
+        $goodInfo['imageUrl'] =  self::getImageUrls($goodInfo);
+        $userId = TokenService::getCurrentUid();
 
-        return $goodInfo;
+        $address = UserAddress::where(['user_id' => $userId, 'status' => 'DEFAULT'])->find();
+        if ($address != null)
+        {
+            $address = $address->toArray();
+        }
+
+        $shopInfo = ShopModel::get(['user_id' => $goodInfo['user_id']]);
+        if ($userId != $goodInfo['user_id'])
+        {
+            $userShop = UserShopModel::where(['user_id' => $userId, 'shop_id' => $shopInfo->id])->find();
+            if ($userShop == null && $shopInfo->id != 0)
+            {
+                $userShop = new UserShopModel();
+                $userShop->user_id = $userId;
+                $userShop->shop_id = $shopInfo->id;
+                $userShop->save();
+            }
+        }
+
+        return array('result' => 'ok', 'goodInfo' => $goodInfo, 'address' => $address, 'shopInfo' => $shopInfo->toArray());
     }
 
     public static function createGoodImage($goodId, $images, $detailImage)
@@ -82,7 +127,7 @@ class Good
         $length = count($imagesId);
         for ($index = 0; $index < $length; $index++)
         {
-            ImageModel::destroy($imagesId[$index]);
+            // ImageModel::destroy($imagesId[$index]);
             GoodImageModel::destroyGoodImageByImageId($imagesId[$index]);
         }
     }

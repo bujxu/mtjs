@@ -15,16 +15,8 @@ class Good
     {
         $id = input('get.good_id');
         $goodInfo = GoodService::getGoodInfo($id);
-        $imagesTemp = $goodInfo['good_images'];
-        $goodInfo['imageUrl'] =  self::getImageUrl($imagesTemp);
-        $userId = TokenService::getCurrentUid();
 
-        $address = UserAddress::where(['user_id' => $userId, 'status' => 'DEFAULT'])->find();
-        if ($address != null)
-        {
-            $address = $address->toArray();
-        }
-        return array('result' => 'ok', 'goodInfo' => $goodInfo, 'address' => $address);
+        return $goodInfo;
     }
 
     // public function getGroupUsers($groupId='')

@@ -4,7 +4,7 @@ namespace app\api\model;
 
 class Good extends BaseModel
 {
-    protected $hidden = ['user_id', 'update_time', 'delete_time', 'create_time'];
+    protected $hidden = ['update_time', 'delete_time', 'create_time'];
 
     public function goodImages()
     {

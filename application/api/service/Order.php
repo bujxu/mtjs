@@ -2,7 +2,11 @@
 
 namespace app\api\service;
 use \think\Db;
-
+use app\api\model\UserAddress;
+use app\api\model\Order as OrderModel;
+use app\api\model\OrderImage as OrderImageModel;
+use app\api\model\Good as GoodModel;
+use app\api\model\Image as ImageModel;
 class Order
 {
     public $input;
@@ -23,7 +27,6 @@ class Order
 
         // $orderSnap = $this->snapOrder($status);
         $order = $this->createOrder();
-        $order['pass'] = true;
         return $order;
     }
 
@@ -34,19 +37,25 @@ class Order
         {
             $orderNo = $this->makeOrderNo();
             $order = new \app\api\model\Order();
+            $address = UserAddress::get(['id' => $this->input['address_id']]);
+            $good = GoodModel::get(['id' => $this->input['good_id']]);
+
+            $order->image_url = $good->image_url;
             $order->user_id = $this->uid;
             $order->order_no = $orderNo;
-            $order->price = $this->input['price'];
-            $order->receiverAddressDetail = $this->input['receiverAddressDetail'];
-            $order->receiverHouseNumber = $this->input['receiverHouseNumber'];
-            $order->receiverContact = $this->input['receiverContact'];
-            $order->receiverPhoneNumber = $this->input['receiverPhoneNumber'];
-            $order->senderAddressDetail = $this->input['senderAddressDetail'];
-            $order->senderHouseNumber = $this->input['senderHouseNumber'];
-            $order->senderContact = $this->input['senderContact'];
-            $order->senderPhoneNumber = $this->input['senderPhoneNumber'];
-            $order->dataInformation = $this->input['dataInformation'];
-            $order->remark = $this->input['remark'];
+            $order->totalPrice = $this->input['totalPrice'];
+            $order->address_detail = $address->address_detail;
+            $order->house_number = $address->house_number;
+            $order->contact = $address->contact;
+            $order->phone_number = $address->phone_number;
+            $order->goodSpecification = $this->input['goodSpecification'];
+            $order->good_id =  $this->input['good_id'];
+            $order->good_owner_id = $good->user_id;
+            $order->goodCount = $this->input['goodCount'];
+            $order->good_name = $good->good_name;
+            $order->good_desc = $good->good_desc;
+            $order->goodCategory = $good->goodCategory;
+            $order->image_url = $good->image_url;
             $order->status = 0;
             $order->save();
 
@@ -63,7 +72,8 @@ class Order
             return [
                 'order_no' => $orderNo,
                 'order_id' => $orderID,
-                'create_time' => $create_time
+                'create_time' => $create_time,
+                'result' => 'ok'
             ];
         }
         catch (Exception $ex)
@@ -73,6 +83,153 @@ class Order
         }
     }
 
+
+    public static function orderStatus($input, $uid)
+    {
+        $order = orderModel::get(['id' => $input['id']]);
+        if (!$order)
+        {
+            return ['result' => 'failed'];
+        }
+        $order->status = $input['status'];
+        $order->save();
+
+        return ['result' => 'ok'];
+    }
+
+    public static function createOrderImage($orderId, $images)
+    {   
+        $imagesId = array_values($images);
+        $length = count($imagesId);
+        for ($index = 0; $index < $length; $index++)
+        {
+            $orderImage = new OrderImageModel();
+            $orderImage->image_id = $imagesId[$index];
+            $orderImage->order_id = $orderId;
+            $orderImage->save();
+        }
+
+        return ;
+    }
+
+    public static function getImageId($val)
+    {
+        $imagesTemp = $val['order_images'];
+        $imageId = [];
+        foreach ($imagesTemp as $value) {
+            array_push($imageId,$value['image']['id']);
+        }
+        
+        return $imageId;
+    }
+
+    public static function userUploadModify($content)
+    {   
+        $imageIdNew = json_decode(input('post.order_img'), true);
+        $orderImageIdOld = self::getImageId(OrderModel::getOrderImageId($content['order_id']));
+        $addImageId = array_diff($imageIdNew, $orderImageIdOld);
+        self::createOrderImage($content['order_id'], $addImageId);
+        $delImageId = array_diff($orderImageIdOld, $imageIdNew);
+        self::deleteOrderImage($delImageId);
+
+        $order = OrderModel::get(['id' => $content['order_id']]);
+        if ($order)
+        {
+            if ($order->status == 1)
+            {
+                $order->status += 1;
+                $order->save();
+            }
+        }
+        return ;
+    }
+
+    public static function deleteOrderImage($images)
+    {
+        $imagesId = array_values($images);
+        $length = count($imagesId);
+        for ($index = 0; $index < $length; $index++)
+        {
+            ImageModel::destroy($imagesId[$index]);
+            OrderImageModel::destroyOrderImageByImageId($imagesId[$index]);
+        }
+    }
+
+    public static function getImageUrls($val)
+    {
+        $imagesTemp = $val['order_images'];
+        $imageId = [];
+        foreach ($imagesTemp as $value) {
+            array_push($imageId,$value['image']['url']);
+        }
+        
+        return $imageId;
+    }
+
+    public static function getOrderDetail($id)
+    {
+        // $id = input('get.order_id');
+        $order = orderModel::get(['id' => $id]);
+        if (!$order)
+        {
+            return ['result' => 'failed'];
+        }
+        $order['orderImageUrl'] =  self::getImageUrls($order);
+
+        $image = ImageModel::get(['id' => $order->image_url]);
+        // $order = $order->toArray();
+        $order['image_url'] = $image->url;
+
+        return ['result' => 'ok', 'order' => $order->toArray()];
+    }
+
+    public static function getOrder($uid)
+    {
+        $status = input('get.status');
+        if ($status == 10)
+            $result = OrderModel::where(['user_id' => $uid])->select()->toArray();
+        else
+            $result = OrderModel::where(['user_id' => $uid, 'status' => $status])->select()->toArray();
+        
+        for ($index = 0; $index < count($result); $index++)
+        {
+            if ($result[$index]['image_url'] != null)
+            {
+                $image = ImageModel::get(['id' => $result[$index]['image_url']]);
+                // array_push($result[$index], ['image' => $image->url]);
+                $result[$index]['image_url'] = $image->url;
+            }
+
+            $result[$index]['goodCategory'] = json_decode($result[$index]['goodCategory'], true);
+            $result[$index]['goodCount'] = json_decode($result[$index]['goodCount'], true);
+        }
+        
+        return $result;
+    }
+
+    public static function getOrderBySellerId($uid)
+    {
+        $status = input('get.status');
+        if ($status == 10)
+            $result = OrderModel::where(['good_owner_id' => $uid])->select()->toArray();
+        else
+            $result = OrderModel::where(['good_owner_id' => $uid, 'status' => $status])->select()->toArray();
+        
+        for ($index = 0; $index < count($result); $index++)
+        {
+            if ($result[$index]['image_url'] != null)
+            {
+                $image = ImageModel::get(['id' => $result[$index]['image_url']]);
+                // array_push($result[$index], ['image' => $image->url]);
+                $result[$index]['image_url'] = $image->url;
+            }
+
+            $result[$index]['goodCategory'] = json_decode($result[$index]['goodCategory'], true);
+            $result[$index]['goodCount'] = json_decode($result[$index]['goodCount'], true);
+        }
+        
+        return $result;
+    }
     public static function makeOrderNo()
     {
         $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');

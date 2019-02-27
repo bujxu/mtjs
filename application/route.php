@@ -79,7 +79,17 @@ Route::post('api/:version/shop/shopCreate', 'api/:version.Shop/shopCreate');
 Route::post('api/:version/shop/shopEdit', 'api/:version.Shop/shopEdit');
 Route::get('api/:version/shop/getShopListInfo', 'api/:version.Shop/getShopListInfo');
 Route::get('api/:version/shop/getShopInfoByShopId', 'api/:version.Shop/getShopInfoByShopId');
+Route::get('api/:version/shop/getShopInfoByGoodId', 'api/:version.Shop/getShopInfoByGoodId');
+//address
 Route::post('api/:version/address/createAddress', 'api/:version.Address/createAddress');
 Route::post('api/:version/address/modifyAddress', 'api/:version.Address/modifyAddress');
 Route::post('api/:version/address/defaultAddress', 'api/:version.Address/defaultAddress');
 Route::get('api/:version/address/deleteAddress', 'api/:version.Address/deleteAddress');
+
+//order
+Route::post('api/:version/order/orderCreate', 'api/:version.Order/orderCreate');
+Route::get('api/:version/order/getOrderDetail', 'api/:version.Order/getOrderDetail');
+Route::post('api/:version/order/orderStatus', 'api/:version.Order/orderStatus');
+Route::post('api/:version/order/uploadImage', 'api/:version.Order/uploadImage');
+Route::post('api/:version/order/userUploadAdd', 'api/:version.Order/userUploadAdd');
+Route::post('api/:version/order/userUploadModify', 'api/:version.Order/userUploadModify');

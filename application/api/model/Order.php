@@ -16,6 +16,11 @@ class Order extends BaseModel
     protected $hidden = ['user_id', 'delete_time', 'update_time'];
     protected $autoWriteTimestamp = true;
 
+    public function image()
+    {
+        return $this->hasMany('Image', 'image_url', 'id');
+    }
+
     public function getSnapItemsAttr($value)
     {
         if (empty($value))
@@ -25,6 +30,18 @@ class Order extends BaseModel
         return json_decode($value);
     }
 
+    public function orderImages()
+    {
+        return $this->hasMany('orderImage', 'order_id', 'id');
+    }
+
+
+    public static function getOrderImageId($orderId)
+    {
+        $image = self::where(['id' => $orderId])->with(['orderImages', 'orderImages.image'])->find()->toArray();
+
+        return $image;
+    }
     public function getSnapAddressAttr($value){
         if(empty($value)){
             return null;

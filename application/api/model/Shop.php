@@ -21,4 +21,13 @@ class Shop extends BaseModel
         return $shopInfo;
     }
 
+    public static function getShopInfoByUserId($userId)
+    {
+        $shopInfo = self::where(['user_id' => $userId])->find();
+        if ($shopInfo != null)
+            $shopInfo = $shopInfo->toArray();
+
+        return $shopInfo;
+    }
+
 }

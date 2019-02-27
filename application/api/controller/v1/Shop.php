@@ -20,8 +20,16 @@ class Shop
     public function getShopInfoByShopId()
     {
         $shopId = input('get.shop_id');
-        $userId = TokenService::getCurrentUid();
-        $result = ShopService::getShopInfoByShopId($shopId, $userId);
+        // $userId = TokenService::getCurrentUid();
+        $result = ShopService::getShopInfoByShopId($shopId);
+        return $result;
+    }
+    
+    public function getShopInfoByGoodId()
+    {
+        $goodId = input('get.good_id');
+
+        $result = ShopService::getShopInfoByGoodId($goodId);
         return $result;
     }
 
