@@ -25,10 +25,10 @@ class Shop
             $shop->phone_number = $content['phone_number'];
             $shop->save();
             
-            $userShop = new UserShopModel();
-            $userShop->user_id = $userId;
-            $userShop->shop_id = $shop->id;
-            $userShop->save();
+            // $userShop = new UserShopModel();
+            // $userShop->user_id = $userId;
+            // $userShop->shop_id = $shop->id;
+            // $userShop->save();
 
             return $shop->id;
         }
@@ -163,7 +163,8 @@ class Shop
     {
         $shop = [];
         $shopId = [0];
-        // array_push($shopId, $userId);
+        $myShop = ShopModel::get(['user_id' => $userId]);
+        array_push($shopId, $myShop->id);
         $otherShopId = UserShopModel::getOtherShopId($userId);
         if ($otherShopId != null)
         {
