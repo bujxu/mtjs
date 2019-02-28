@@ -29,7 +29,7 @@ class Address extends \app\api\controller\BaseController
 
         if ($data['status'] == 'DEFAULT')
         {
-            self::defaultAddress();
+            self::defaultAddress($address->id);
         }
     }
 
@@ -39,9 +39,13 @@ class Address extends \app\api\controller\BaseController
         UserAddress::destroy([$id]);
     }
 
-    public function defaultAddress()
+    public function defaultAddress($id=0)
     {
-        $id = input('post.address_id');
+        if ($id == 0)
+        {
+            $id = input('post.address_id');
+        }
+
         $uid = TokenService::getCurrentUid();
         $addressList = UserAddress::where(['user_id' => $uid])->select();
         for ($index = 0; $index < count($addressList); $index++)
@@ -72,7 +76,7 @@ class Address extends \app\api\controller\BaseController
 
         if ($data['status'] == 'DEFAULT')
         {
-            self::defaultAddress();
+            self::defaultAddress($data['address_id']);
         }
     }
     public function commitAddress()
