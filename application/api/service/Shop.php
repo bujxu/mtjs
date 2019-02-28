@@ -24,6 +24,11 @@ class Shop
             $shop->shop_desc = $content['shop_desc'];
             $shop->phone_number = $content['phone_number'];
             $shop->save();
+            
+            $userShop = new UserShopModel();
+            $userShop->user_id = $userId;
+            $userShop->shop_id = $shop->id;
+            $userShop->save();
 
             return $shop->id;
         }
@@ -148,7 +153,8 @@ class Shop
             for ($index = 0; $index < count($imagesTemp); $index++) {
                 $goodList[$index]['imageUrl'] =  self::getImageUrl($imagesTemp[$index]);
             }
-            return array('shopInfo' => $shopInfo, 'goodList' => $goodList);
+            $userInfo = UserModel::getUserInfoById($shopInfo['user_id']);
+            return array('shopInfo' => $shopInfo, 'goodList' => $goodList, 'userInfo' => $userInfo);
         }
         return null;
     }
@@ -156,17 +162,17 @@ class Shop
     public static function getShopListInfo($userId)
     {
         $shop = [];
-        $otherUserIds = [0];
-        array_push($otherUserIds, $userId);
-        $otherUserId = UserShopModel::getOtherUsers($userId);
-        if ($otherUserId != null)
+        $shopId = [0];
+        // array_push($shopId, $userId);
+        $otherShopId = UserShopModel::getOtherShopId($userId);
+        if ($otherShopId != null)
         {
-            $otherUserIds = array_merge($otherUserIds, $otherUserId);
+            $shopId = array_merge($shopId, $otherShopId);
         }
 
-        for ($index = 0; $index < count($otherUserIds); $index++)
+        for ($index = 0; $index < count($shopId); $index++)
         {
-            $shopInfo = ShopModel::getShopInfo($otherUserIds[$index]);
+            $shopInfo = ShopModel::getShopInfoByShopId($shopId[$index]);
             $shopGoodInfo = self::getShopGoodInfo($shopInfo);
             if (null != $shopGoodInfo)
             {

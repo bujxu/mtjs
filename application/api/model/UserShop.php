@@ -10,10 +10,10 @@ class UserShop extends BaseModel
         return $user;
     }
 
-    public static function getOtherUsers($userId)
+    public static function getOtherShopId($userId)
     {
         $userShop = self::where(['user_id' => $userId])->select()->toArray();
-        return array_column($userShop, 'user_id');
+        return array_column($userShop, 'shop_id');
     }
 
     public static function checkUserIdExist($GoodId, $userId)
