@@ -163,8 +163,11 @@ class Shop
     {
         $shop = [];
         $shopId = [0];
-        $myShop = ShopModel::get(['user_id' => $userId]);
-        array_push($shopId, $myShop->id);
+        $myShop = ShopModel::where(['user_id' => $userId])->find();
+        if ($myShop != null)
+        {
+            array_push($shopId, $myShop->id);
+        }
         $otherShopId = UserShopModel::getOtherShopId($userId);
         if ($otherShopId != null)
         {
