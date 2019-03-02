@@ -196,8 +196,11 @@ class Order
             if ($result[$index]['image_url'] != null)
             {
                 $image = ImageModel::get(['id' => $result[$index]['image_url']]);
-                // array_push($result[$index], ['image' => $image->url]);
-                $result[$index]['image_url'] = $image->url;
+                if ($image != null)
+                {
+                    $result[$index]['image_url'] = $image->url;
+                }
+
             }
 
             $result[$index]['goodCategory'] = json_decode($result[$index]['goodCategory'], true);

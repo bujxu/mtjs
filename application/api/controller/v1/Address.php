@@ -105,6 +105,14 @@ class Address extends \app\api\controller\BaseController
         return $result;
     }
 
+    public function getDefaultAddress()
+    {
+        $uid = TokenService::getCurrentUid();
+        $result = UserAddress::get(['user_id' => $uid, 'status' => 'DEFAULT']);
+        
+        return $result;
+    }
+    
     public function createOrUpdateAddress()
     {
         $validate = new \app\api\validate\AddressNew;

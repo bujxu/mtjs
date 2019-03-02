@@ -66,6 +66,7 @@ Route::get('api/:version/group/getCommit', 'api/:version.Group/getCommit');
 Route::post('api/:version/address/commitAddress', 'api/:version.Address/commitAddress');
 Route::get('api/:version/address/getAddress', 'api/:version.Address/getAddress');
 Route::post('api/:version/user/login', 'api/:version.User/login');
+Route::get('api/:version/user/getQCode', 'api/:version.User/getQCode');
 //good
 Route::post('api/:version/good/uploadImage', 'api/:version.Good/uploadImage');
 Route::post('api/:version/good/userUploadAdd', 'api/:version.Good/userUploadAdd');
@@ -80,12 +81,14 @@ Route::post('api/:version/shop/shopEdit', 'api/:version.Shop/shopEdit');
 Route::get('api/:version/shop/getShopListInfo', 'api/:version.Shop/getShopListInfo');
 Route::get('api/:version/shop/getShopInfoByShopId', 'api/:version.Shop/getShopInfoByShopId');
 Route::get('api/:version/shop/getShopInfoByGoodId', 'api/:version.Shop/getShopInfoByGoodId');
+Route::get('api/:version/shop/getShopInfoByUserId', 'api/:version.Shop/getShopInfoByUserId');
+Route::get('api/:version/shop/getShopShareQCode', 'api/:version.Shop/getShopShareQCode');
 //address
 Route::post('api/:version/address/createAddress', 'api/:version.Address/createAddress');
 Route::post('api/:version/address/modifyAddress', 'api/:version.Address/modifyAddress');
 Route::post('api/:version/address/defaultAddress', 'api/:version.Address/defaultAddress');
 Route::get('api/:version/address/deleteAddress', 'api/:version.Address/deleteAddress');
-
+Route::get('api/:version/address/getDefaultAddress', 'api/:version.Address/getDefaultAddress');
 //order
 Route::post('api/:version/order/orderCreate', 'api/:version.Order/orderCreate');
 Route::get('api/:version/order/getOrderDetail', 'api/:version.Order/getOrderDetail');

@@ -96,8 +96,5 @@ class User
         }
     }
 
-    public function editCommit()
-    {
 
-    }
 }

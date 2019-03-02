@@ -17,10 +17,27 @@ class Shop
         
         return $result;
     }
+
+    public function getShopShareQCode()
+    {
+        $userId = TokenService::getCurrentUid();
+        $result = ShopService::getShopShareQCode($userId);
+        
+        return $result;
+    }
+
+    public function getShopInfoByUserId()
+    {
+        $userId = TokenService::getCurrentUid();
+        $result = ShopService::getShopInfoByUserId($userId);
+        
+        return $result;
+    }
+
     public function getShopInfoByShopId()
     {
         $shopId = input('get.shop_id');
-        // $userId = TokenService::getCurrentUid();
+
         $result = ShopService::getShopInfoByShopId($shopId);
         return $result;
     }
