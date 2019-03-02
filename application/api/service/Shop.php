@@ -180,7 +180,7 @@ Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 FirePHP
         $data = array();  
 
         $data['scene'] = 'shop';//自定义信息，可以填写诸如识别用户身份的字段，注意用中文时的情况  
-        $data['page'] = 'pages/index/index?shopId='.$shop->id;//扫描后对应的path  
+        $data['page'] = 'pages/index/index';//扫描后对应的path  
         $fileName = 'shop'.$shop->id;
 
         $upload_config = Config('setting.upload_config');
