@@ -7,6 +7,8 @@ use app\api\model\Order as OrderModel;
 use app\api\model\OrderImage as OrderImageModel;
 use app\api\model\Good as GoodModel;
 use app\api\model\Image as ImageModel;
+use app\api\service\Shop as ShopService;
+
 class Order
 {
     public $input;
@@ -91,10 +93,27 @@ class Order
         {
             return ['result' => 'failed'];
         }
+        
+        if ($input['status'] == 1)
+        {
+            $goodCount = $input['goodCount'];
+            $goodCategory = $input['goodCategory'];
+
+            $lenght = count($goodCount);
+            for ($index = 0; $index < $lenght; $index++)
+            {
+                $goodCategory[$index]['storageInput'] -= $goodCount[$index];
+            }
+            $good = GoodModel::get(['id' => $order->good_id]);
+            $good->goodCategory = json_encode($goodCategory);
+            $good->save();
+        }
+
+        $shopInfo = ShopService::getShopInfo($order->good_owner_id);
         $order->status = $input['status'];
         $order->save();
 
-        return ['result' => 'ok'];
+        return ['result' => 'ok', 'shopInfo' => $shopInfo];
     }
 
     public static function createOrderImage($orderId, $images)
@@ -174,7 +193,11 @@ class Order
         {
             return ['result' => 'failed'];
         }
-        $order['orderImageUrl'] =  self::getImageUrls($order);
+        
+        if ($order->status > 1)
+        {
+            $order['orderImageUrl'] =  self::getImageUrls($order);
+        }
 
         $image = ImageModel::get(['id' => $order->image_url]);
         // $order = $order->toArray();

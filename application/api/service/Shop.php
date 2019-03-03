@@ -278,8 +278,32 @@ Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 FirePHP
 
     public static function getMyShopInfo($userId)
     {
-        $shop = ShopModel::get(['user_id' => $userId]);
-        return self::getShopGoodInfo($shop);
+        $shopInfo = ShopModel::get(['user_id' => $userId]);
+        if ($shopInfo != null)
+        {
+            // $map['id']  = ['id' => [['eq' , $shopInfo['image_url']], ['eq', $shopInfo['qr_code_image_url']], 'or']];
+            $map['id']  = ['id' => ['eq' , $shopInfo['image_url']]];
+            $image = ImageModel::where($map['id'])->find();
+            if ($image != null)
+            {
+                $image = $image->toArray();
+                $shopInfo['image_url'] = $image['url'];
+            }
+            $goodList = GoodService::getGoodByUserId($userId);
+            // $imagesTemp = array_column($goodList, 'good_images');
+    
+            for ($index = 0; $index < count($goodList); $index++) {
+                // array_push($goodList[$index], self::getImageUrl($imagesTemp[$index]));
+                $goodList[$index]['imageUrl'] =  GoodService::getImageUrls($goodList[$index]);
+                $goodList[$index]['imageId'] = GoodService::getImageId($goodList[$index]);
+                // $goodList[$index]['goodCategory'] = unserialize($goodList[$index]['goodCategory']);
+            }
+            $userInfo = UserModel::getUserInfoById($shopInfo['user_id']);
+            return array('shopInfo' => $shopInfo, 'goodList' => $goodList, 'userInfo' => $userInfo);
+        }
+        
+        return null;
+
     }
 
     public static function getShopGoodInfo($shopInfo)
