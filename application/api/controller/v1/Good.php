@@ -109,6 +109,12 @@ class Good
         return array('good_list' => $goodList);
     }
 
+    public function getGoodShareQCode()
+    {
+        $goodId = input('get.goodId');
+        return GoodService::getGoodShareQCode($goodId);
+    }
+
     public function goodDelete()
     {
         $id = input('get.id');

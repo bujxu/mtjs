@@ -179,8 +179,8 @@ Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 FirePHP
 
         $data = array();  
 
-        $data['scene'] = 'shop';//自定义信息，可以填写诸如识别用户身份的字段，注意用中文时的情况  
-        $data['page'] = 'pages/index/index';//扫描后对应的path  
+        $data['scene'] = 'shop'.$shop->id;//自定义信息，可以填写诸如识别用户身份的字段，注意用中文时的情况  
+        $data['page'] = 'pages/shop/shopShow/shopShow';//扫描后对应的path  
         $fileName = 'shop'.$shop->id;
 
         $upload_config = Config('setting.upload_config');
@@ -208,7 +208,7 @@ Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 FirePHP
         {
             $ret['result'] = 1;
         }
-        $QRcodePath = Config('setting.web_url').'upload/'."QRcode/".$fileName.".jpg";
+        $QRcodePath = Config('setting.web_url').Config('setting.QRcode').$fileName.".jpg";
         $ret['filePath'] = $QRcodePath;
 
         echo json_encode($ret);
@@ -274,6 +274,12 @@ Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 FirePHP
             return null;
         }
         return self::getShopInfoByShopId($shopInfo['id'], $user_id);
+    }
+
+    public static function getMyShopInfo($userId)
+    {
+        $shop = ShopModel::get(['user_id' => $userId]);
+        return self::getShopGoodInfo($shop);
     }
 
     public static function getShopGoodInfo($shopInfo)

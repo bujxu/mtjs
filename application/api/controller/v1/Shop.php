@@ -26,6 +26,14 @@ class Shop
         return $result;
     }
 
+    public static function getMyShopInfo()
+    {
+        $userId = TokenService::getCurrentUid();
+        $result = ShopService::getMyShopInfo($userId);
+        
+        return $result;
+    }
+
     public function getShopInfoByUserId()
     {
         $userId = TokenService::getCurrentUid();

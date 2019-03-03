@@ -72,10 +72,13 @@ Route::post('api/:version/good/uploadImage', 'api/:version.Good/uploadImage');
 Route::post('api/:version/good/userUploadAdd', 'api/:version.Good/userUploadAdd');
 Route::post('api/:version/good/userUploadModify', 'api/:version.Good/userUploadModify');
 Route::get('api/:version/good/goodList', 'api/:version.Good/goodList');
+Route::get('api/:version/good/getGoodShareQCode', 'api/:version.Good/getGoodShareQCode');
 Route::get('api/:version/good/goodDelete', 'api/:version.Good/goodDelete');
 Route::get('api/:version/good/getGoodInfo', 'api/:version.Good/getGoodInfo');
 //shop
 Route::get('api/:version/shop/getShopInfo', 'api/:version.Shop/getShopInfo');
+Route::get('api/:version/shop/getMyShopInfo', 'api/:version.Shop/getMyShopInfo');
+
 Route::post('api/:version/shop/shopCreate', 'api/:version.Shop/shopCreate');
 Route::post('api/:version/shop/shopEdit', 'api/:version.Shop/shopEdit');
 Route::get('api/:version/shop/getShopListInfo', 'api/:version.Shop/getShopListInfo');
