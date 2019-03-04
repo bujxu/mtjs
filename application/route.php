@@ -94,6 +94,7 @@ Route::get('api/:version/address/deleteAddress', 'api/:version.Address/deleteAdd
 Route::get('api/:version/address/getDefaultAddress', 'api/:version.Address/getDefaultAddress');
 //order
 Route::post('api/:version/order/orderCreate', 'api/:version.Order/orderCreate');
+Route::post('api/:version/order/orderDelete', 'api/:version.Order/orderDelete');
 Route::get('api/:version/order/getOrderDetail', 'api/:version.Order/getOrderDetail');
 Route::post('api/:version/order/orderStatus', 'api/:version.Order/orderStatus');
 Route::post('api/:version/order/uploadImage', 'api/:version.Order/uploadImage');

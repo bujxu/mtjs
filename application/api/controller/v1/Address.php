@@ -66,14 +66,15 @@ class Address extends \app\api\controller\BaseController
     {
         $data= input('post.');
         $address = UserAddress::where(['id' => $data['address_id']])->find();
-        $address->data([
-            'name' => $data['contact'],
+        $data = [
+            'contact' => $data['contact'],
             'house_number' => $data['houseNumber'],
-            'detail_address' => $data['addressDetail'],
-            'mobile' => $data['phoneNumber'],
+            'address_detail' => $data['addressDetail'],
+            'phone_number' => $data['phoneNumber'],
             'status' => $data['status'],
-        ])->save();
+        ];
 
+        $address->save($data);
         if ($data['status'] == 'DEFAULT')
         {
             self::defaultAddress($data['address_id']);

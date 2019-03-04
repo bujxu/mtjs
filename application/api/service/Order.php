@@ -85,6 +85,18 @@ class Order
         }
     }
 
+    public static function orderDelete($orderId)
+    {
+        $imagesId = self::getImageId(OrderModel::getOrderImageId($orderId));
+        $length = count($imagesId);
+        for ($index = 0; $index < $length; $index++)
+        {
+            ImageModel::destroy($imagesId[$index]);
+            OrderImageModel::destroyOrderImageByImageId($imagesId[$index]);
+        }
+        
+        orderModel::destroy([$orderId]);
+    }
 
     public static function orderStatus($input, $uid)
     {

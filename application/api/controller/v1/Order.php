@@ -23,6 +23,12 @@ class Order extends \app\api\controller\BaseController
         
         return $status;
     }
+    
+    public function orderDelete()
+    {
+        $orderId = input('post.orderId');
+        return OrderService::orderDelete($orderId);
+    }
 
     public function orderStatus()
     {
