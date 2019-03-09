@@ -222,7 +222,7 @@ class Order
     {
         $status = input('get.status');
         if ($status == 10)
-            $result = OrderModel::where(['user_id' => $uid])->select()->toArray();
+            $result = OrderModel::where(['user_id' => $uid])->where('status', 'neq', 4)->select()->toArray();
         else
             $result = OrderModel::where(['user_id' => $uid, 'status' => $status])->select()->toArray();
         

@@ -78,6 +78,7 @@ Route::get('api/:version/good/getGoodInfo', 'api/:version.Good/getGoodInfo');
 //shop
 Route::get('api/:version/shop/getShopInfo', 'api/:version.Shop/getShopInfo');
 Route::get('api/:version/shop/getMyShopInfo', 'api/:version.Shop/getMyShopInfo');
+Route::get('api/:version/shop/getMyShopInfoDeleted', 'api/:version.Shop/getMyShopInfoDeleted');
 
 Route::post('api/:version/shop/shopCreate', 'api/:version.Shop/shopCreate');
 Route::post('api/:version/shop/shopEdit', 'api/:version.Shop/shopEdit');

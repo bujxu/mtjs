@@ -34,6 +34,13 @@ class Shop
         return $result;
     }
 
+    public static function getMyShopInfoDeleted()
+    {
+        $userId = TokenService::getCurrentUid();
+        $result = ShopService::getMyShopInfoDeleted($userId);
+        
+        return $result;
+    }
     public function getShopInfoByUserId()
     {
         $userId = TokenService::getCurrentUid();

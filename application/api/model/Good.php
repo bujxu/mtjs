@@ -1,11 +1,13 @@
 <?php 
 
 namespace app\api\model;
-
+use traits\model\SoftDelete;
 class Good extends BaseModel
 {
     protected $hidden = ['update_time', 'delete_time', 'create_time'];
+    protected $deleteTime = 'delete_time';
 
+    use SoftDelete;
     public function goodImages()
     {
         return $this->hasMany('goodImage', 'good_id', 'id');
@@ -31,9 +33,15 @@ class Good extends BaseModel
         return $goodList;
     }
 
+    public static function getGoodListDeleted($userId)
+    {
+        $goodList = self::onlyTrashed()->where(['user_id' => $userId])->with(['goodImages', 'goodImages.image'])->select()->toArray();
+
+        return $goodList;
+    }
     public static function getGoodInfo($id)
     {
-        $goodInfo = self::where(['id' => $id])->with(['goodImages', 'goodImages.image'])->find();
+        $goodInfo = self::withTrashed()->where(['id' => $id])->with(['goodImages', 'goodImages.image'])->find();
         if ($goodInfo == null)
         {
             return null;
@@ -41,29 +49,4 @@ class Good extends BaseModel
         return $goodInfo->toArray();
     }
 
-    public static function modifyContent($commitId, $content)
-    {
-        $commitDb = self::where(['id' => $commitId])->find();
-        $commitDb->content = $content;
-        $commitDb->save();
-    }
-
-    public static function getGroupCommit($groupId)
-    {
-        $offset = input('get.offset');
-        $size = input('get.size');
-        $commits = self::where(['group_id' => $groupId])->with(['commitImages', 'commitImages.image'])->limit($offset, $size)->select()->toArray();
-        return $commits;
-    }
-
-    public static function getGroupNewestCommit($groupId)
-    {
-        $commit = self::where(['group_id' => $groupId])->order("id desc")->with(['commitImages', 'commitImages.image'])->find();
-        if ($commit == null)
-        {
-            return null;
-        }
- 
-        return $commit->toArray();
-    }
 }

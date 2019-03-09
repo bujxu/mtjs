@@ -329,20 +329,11 @@ Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 FirePHP
         return $goodList;
     }
 
-
-    public static function getGroupCommit($groupId)
+    public static function getGoodByUserIdDeleted($userId)
     {
-        $time = time();
-        $commits = CommitModel::getGroupCommit($groupId);
-        for ($index = 0; $index < count($commits); $index++)
-        {
-            $result[$index]['content'] = $commits[$index]['content'];
-            $result[$index]['images'] = $commits[$index]['commit_images'][$time % (count($commits[$index]['commit_images']))]['image']['url'];
-            $result[$index]['commitId'] = $commits[$index]['id'];
-            $result[$index]['time'] = $commits[$index]['create_time'];
-            $result[$index]['count'] = count($commits[$index]['commit_images']);
-        }
+        $goodList = GoodModel::getGoodListDeleted($userId);
 
-        return $result;
+        return $goodList;
     }
+
 }
